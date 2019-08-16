@@ -22,7 +22,7 @@ class Instructor extends Person {
     console.log(`Today we are learning about ${subject}.`);
   }
   grade(student, subject) {
-    console.log(`${student.name} received a perfect score on ${subject}`);
+    console.log(`${student.name} received a perfect score on ${subject}.`);
   }
 }
 
@@ -74,7 +74,7 @@ const person2 = new Person({
   location: "New York"
 });
 
-const instrutor1 = new Instructor({
+const instructor1 = new Instructor({
   name: "Richard",
   age: 26,
   location: "California",
@@ -132,27 +132,27 @@ const teamLead2 = new teamLead({
   favInstructor: "Pace"
 });
 
-console.log(person1);
-person1.speak();
-console.log(person2);
-person2.speak();
-console.log(instrutor1);
-instrutor1.demo("React");
-// instructor1.grade();
-console.log(instructor2);
-instructor2.demo("JavaScript");
-// instructor2.grade();
-console.log(student1);
-student1.listsSubjects();
-student1.PRassignment("FSWeb");
-student1.sprintChallenge("FSWeb");
-console.log(student2);
-student2.listsSubjects();
-student2.PRassignment("UX Design");
-student2.sprintChallenge("UX Design");
-console.log(teamLead1);
-teamLead1.standUp("webpt9");
-teamLead1.debugCode(student2, "UX Design");
-console.log(teamLead2);
-teamLead2.standUp("webpt9");
-teamLead2.debugCode(student1, "FSWeb");
+console.log(person1); //
+person1.speak(); //
+console.log(person2); //
+person2.speak(); //
+console.log(instructor1); //
+instructor1.demo("React"); //
+instructor1.grade(student1, "UX Design"); //
+console.log(instructor2); //
+instructor2.demo("JavaScript"); //
+instructor2.grade(student2, "FSWeb"); //
+console.log(student1); //
+student1.listsSubjects(); //
+student1.PRassignment("FSWeb"); //
+student1.sprintChallenge("FSWeb"); //
+console.log(student2); //
+student2.listsSubjects(); //
+student2.PRassignment("UX Design"); //
+student2.sprintChallenge("UX Design"); //
+console.log(teamLead1); //
+teamLead1.standUp("webpt9"); //
+teamLead1.debugCode(student2, "UX Design"); //
+console.log(teamLead2); //
+teamLead2.standUp("webpt9"); //
+teamLead2.debugCode(student1, "FSWeb"); //
