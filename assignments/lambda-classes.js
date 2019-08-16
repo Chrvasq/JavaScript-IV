@@ -24,6 +24,14 @@ class Instructor extends Person {
   grade(student, subject) {
     console.log(`${student.name} received a perfect score on ${subject}.`);
   }
+  gradeAssignment(student) {
+    let randomNum = Math.floor(Math.random() * 10) + 1;
+    if (randomNum <= 5) {
+      return (student.grade -= Math.floor(Math.random() * 5) + 1);
+    } else {
+      return (student.grade += Math.floor(Math.random() * 11) + 1);
+    }
+  }
 }
 
 // Student Class - inherits from Person
@@ -33,6 +41,9 @@ class Student extends Person {
     this.previousBackground = attr.previousBackground;
     this.className = attr.className;
     this.favSubjects = attr.favSubjects;
+    this.grade = attr.grade;
+    this.graduated = attr.graduated;
+    this.assignedInstructor = attr.assignedInstructor;
   }
   listsSubjects() {
     this.favSubjects.forEach(subject => console.log(subject));
@@ -42,6 +53,20 @@ class Student extends Person {
   }
   sprintChallenge(subject) {
     console.log(`${this.name} has begun sprint challenge on ${subject}.`);
+  }
+  graduate() {
+    if (this.grade > 70) {
+      this.graduated = true;
+      console.log(`Congratulations ${this.name}! You've graduated!`);
+    } else {
+      console.log(
+        `Sorry ${
+          this.name
+        }, you're not eligible to graduate yet. Let's grade your assignment again.`
+      );
+      this.assignedInstructor.gradeAssignment(this);
+      return this.graduate();
+    }
   }
 }
 
@@ -98,7 +123,10 @@ const student1 = new Student({
   location: "California",
   previousBackground: "Data Analyst",
   className: "FSWeb",
-  favSubjects: ["Math", "Science", "English"]
+  favSubjects: ["Math", "Science", "English"],
+  grade: 80,
+  graduated: false,
+  assignedInstructor: instructor1
 });
 
 const student2 = new Student({
@@ -107,7 +135,10 @@ const student2 = new Student({
   location: "California",
   previousBackground: "Hospitality Industry",
   className: "UX Design",
-  favSubjects: ["English", "History"]
+  favSubjects: ["English", "History"],
+  grade: 60,
+  graduated: false,
+  assignedInstructor: instructor2
 });
 
 const teamLead1 = new teamLead({
@@ -132,27 +163,29 @@ const teamLead2 = new teamLead({
   favInstructor: "Pace"
 });
 
-console.log(person1); //
-person1.speak(); //
-console.log(person2); //
-person2.speak(); //
-console.log(instructor1); //
-instructor1.demo("React"); //
-instructor1.grade(student1, "UX Design"); //
-console.log(instructor2); //
-instructor2.demo("JavaScript"); //
-instructor2.grade(student2, "FSWeb"); //
-console.log(student1); //
-student1.listsSubjects(); //
-student1.PRassignment("FSWeb"); //
-student1.sprintChallenge("FSWeb"); //
-console.log(student2); //
-student2.listsSubjects(); //
-student2.PRassignment("UX Design"); //
-student2.sprintChallenge("UX Design"); //
-console.log(teamLead1); //
-teamLead1.standUp("webpt9"); //
-teamLead1.debugCode(student2, "UX Design"); //
-console.log(teamLead2); //
-teamLead2.standUp("webpt9"); //
-teamLead2.debugCode(student1, "FSWeb"); //
+console.log(person1);
+person1.speak();
+console.log(person2);
+person2.speak();
+console.log(instructor1);
+instructor1.demo("React");
+instructor1.grade(student1, "UX Design");
+console.log(instructor2);
+instructor2.demo("JavaScript");
+instructor2.grade(student2, "FSWeb");
+console.log(student1);
+student1.listsSubjects();
+student1.PRassignment("FSWeb");
+student1.sprintChallenge("FSWeb");
+console.log(student2);
+student2.listsSubjects();
+student2.PRassignment("UX Design");
+student2.sprintChallenge("UX Design");
+console.log(teamLead1);
+teamLead1.standUp("webpt9");
+teamLead1.debugCode(student2, "UX Design");
+console.log(teamLead2);
+teamLead2.standUp("webpt9");
+teamLead2.debugCode(student1, "FSWeb");
+student1.graduate(); // Congrats Pradeep! You've graduated!
+student2.graduate(); // Will loop until student can graduate
